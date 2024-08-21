@@ -13,7 +13,7 @@ public class Movie {
     private Integer id;
     private String title;
     private float rating;
-    private int priority;
+    private String priority;
     private String comment;
 
 
@@ -41,11 +41,11 @@ public class Movie {
         this.rating = rating;
     }
 
-    public int getPriority() {
+    public String getPriority() {
         return this.priority;
     }
 
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         this.priority = priority;
     }
 

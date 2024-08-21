@@ -55,28 +55,6 @@
                     <td th:text="${movierow.comment}">Peter recommended</td>
                     <td><a href="#" class="btn btn-info" role="button" th:href="@{/watchlistItemForm(id=${movierow.id})}">Update</a></td>
                 </tr>
-                <tr th:each="movierow :${watchlistrows}">
-                    <td th:text="${movierow.title}">Inception</td>
-                    <td th:text="${movierow.rating}">8.8</td>
-                    <td th:text="${movierow.priority}">HIGH</td>
-                    <td th:text="${movierow.comment}">Mind-bending thriller</td>
-                    <td><a href="#" class="btn btn-info" role="button" th:href="@{/watchlistItemForm(id=${movierow.id})}">Update</a></td>
-                </tr>
-                <tr th:each="movierow :${watchlistrows}">
-                    <td th:text="${movierow.title}">The Dark Knight</td>
-                    <td th:text="${movierow.rating}">9.0</td>
-                    <td th:text="${movierow.priority}">MEDIUM</td>
-                    <td th:text="${movierow.comment}">Critically acclaimed</td>
-                    <td><a href="#" class="btn btn-info" role="button" th:href="@{/watchlistItemForm(id=${movierow.id})}">Update</a></td>
-                </tr>
-                <tr th:each="movierow :${watchlistrows}">
-                    <td th:text="${movierow.title}">Interstellar</td>
-                    <td th:text="${movierow.rating}">8.6</td>
-                    <td th:text="${movierow.priority}">HIGH</td>
-                    <td th:text="${movierow.comment}">Epic space exploration</td>
-                    <td><a href="#" class="btn btn-info" role="button" th:href="@{/watchlistItemForm(id=${movierow.id})}">Update</a></td>
-                </tr>
-                
 			</tbody>
 		</table>
 		<hr/>
