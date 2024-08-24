@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +16,8 @@
 
         /* Navigation bar styles */
         .navbar {
-            background-color: #28a745; /* Secondary color in Bootstrap */
+            background-color: #28a745;
+            /* Secondary color in Bootstrap */
             padding: 10px 0;
         }
 
@@ -30,7 +32,8 @@
 
         .navbar a:hover,
         .navbar a.active {
-            background-color: #28a745; /* Darker shade of the secondary color */
+            background-color: #28a745;
+            /* Darker shade of the secondary color */
             color: white;
         }
 
@@ -40,7 +43,8 @@
         }
 
         .navbar .navbar-toggler {
-            display: none; /* Hide the toggler for simplicity */
+            display: none;
+            /* Hide the toggler for simplicity */
         }
 
         .navbar .navbar-collapse {
@@ -125,6 +129,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="navbar">
         <a href="" class="navbar-brand">Watchlist App</a>
@@ -136,7 +141,7 @@
     <div class="container">
         <form action="#" method="post" th:action="@{/watchlistItemForm}" th:object="${watchlistItem}">
             <h2>Submit an item</h2>
-            <hr/>
+            <hr />
             <div class="form-group">
                 <label for="title">Title</label>
                 <input th:field="*{title}" type="text" class="form-control" placeholder="Mandatory" />
@@ -164,4 +169,5 @@
         </form>
     </div>
 </body>
+
 </html>

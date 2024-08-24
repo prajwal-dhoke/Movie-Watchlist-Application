@@ -14,7 +14,8 @@
 
         /* Navigation bar styles */
         .navbar {
-            background-color: #28a745; /* Secondary color */
+            background-color: #28a745;
+            /* Secondary color */
             padding: 10px 0;
         }
 
@@ -29,7 +30,8 @@
 
         .navbar a:hover,
         .navbar a.active {
-            background-color: #28a745; /* Darker shade of the secondary color */
+            background-color: #28a745;
+            /* Darker shade of the secondary color */
             color: white;
         }
 
@@ -39,7 +41,8 @@
         }
 
         .navbar .navbar-toggler {
-            display: none; /* Hide the toggler for simplicity */
+            display: none;
+            /* Hide the toggler for simplicity */
         }
 
         .navbar .navbar-collapse {
@@ -74,7 +77,8 @@
             margin-bottom: 20px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
@@ -123,7 +127,7 @@
                 <a href="/watchlistItemForm" class="nav-link">Submit an item</a>
             </div>
         </nav>
-        
+
         <h2 class="mt-4">Watchlist</h2>
         <table class="table">
             <thead class="thead-light">
@@ -142,14 +146,15 @@
                     <td th:text="${movierow.priority}">LOW</td>
                     <td th:text="${movierow.comment}">Peter recommended</td>
                     <td>
-                        <a href="#" class="btn-info" role="button" th:href="@{/watchlistItemForm(id=${movierow.id})}">Update</a>
+                        <a href="#" class="btn-info" role="button"
+                            th:href="@{/watchlistItemForm(id=${movierow.id})}">Update</a>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <hr/>
+        <hr />
         <div>
-            <div>Number of movies to watch: <span th:text="${noofmovies}"></span></div>	 
+            <div>Number of movies to watch: <span th:text="${noofmovies}"></span></div>
         </div>
     </div>
 </body>
