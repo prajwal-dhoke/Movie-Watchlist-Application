@@ -1,10 +1,14 @@
 package com.example.watchlist.watchlistapplication.entity;
 
+import com.example.watchlist.watchlistapplication.entity.Validation.Priority;
+import com.example.watchlist.watchlistapplication.entity.Validation.Rating;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Movie {
@@ -14,8 +18,11 @@ public class Movie {
     private Integer id;
     @NotBlank(message = "Title cannot be blank")
     private String title;
+    @Rating
     private float rating;
+    @Priority
     private String priority;
+    @Size(max = 50, message = "Comments cannot be more than 50 characters")
     private String comment;
 
 
