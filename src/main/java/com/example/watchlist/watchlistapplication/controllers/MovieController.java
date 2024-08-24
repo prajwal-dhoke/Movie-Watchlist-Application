@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.example.watchlist.watchlistapplication.entity.Movie;
 import com.example.watchlist.watchlistapplication.service.DatabaseService;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class MovieController {
@@ -37,7 +40,10 @@ public class MovieController {
     }
 
     @PostMapping("/watchlistItemForm")
-    public ModelAndView submitWatchListForm( Movie movie) {
+    public ModelAndView submitWatchListForm(@Valid Movie movie,BindingResult result) {
+        if(result.hasErrors()){
+            return new ModelAndView("watchlistItemForm");
+        }
         Integer id = movie.getId();
         if(id == null){
             databaseService.create(movie);
