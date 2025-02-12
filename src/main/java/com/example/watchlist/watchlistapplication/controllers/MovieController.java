@@ -23,38 +23,41 @@ import jakarta.validation.Valid;
 public class MovieController {
 
     @Autowired
-    DatabaseService databaseService;
+    private DatabaseService databaseService;
 
     @GetMapping("/watchlistItemForm")
-    public ModelAndView showWatchlistItemForm(@RequestParam (required = false) Integer id) {
-        System.out.println(id);
+    public ModelAndView showWatchlistItemForm(@RequestParam(required = false) Integer id) {
         String viewName = "watchlistItemForm";
         Map<String, Object> model = new HashMap<>();
-        if (id == null) {
-            model.put("watchlistItem",new Movie());
+
+        // Handle the case where the ID is provided but the movie is not found
+        if (id != null) {
+            Movie movie = databaseService.getMovieById(id);
+            if (movie != null) {
+                model.put("watchlistItem", movie);
+            } else {
+                model.put("watchlistItem", new Movie()); // Default to an empty Movie object
+            }
+        } else {
+            model.put("watchlistItem", new Movie());
         }
-        else{
-            model.put("watchlistItem", databaseService.getMovieById(id));
-        }
-        // model.put("watchlistItem", new Movie());
+
         return new ModelAndView(viewName, model);
     }
 
     @PostMapping("/watchlistItemForm")
-    public ModelAndView submitWatchListForm(@Valid @ModelAttribute("watchlistItem") Movie movie,BindingResult result) {
-        if(result.hasErrors()){
+    public ModelAndView submitWatchListForm(@Valid @ModelAttribute("watchlistItem") Movie movie, BindingResult result) {
+        if (result.hasErrors()) {
             return new ModelAndView("watchlistItemForm");
         }
-        Integer id = movie.getId();
-        if(id == null){
+
+        if (movie.getId() == null) {
             databaseService.create(movie);
+        } else {
+            databaseService.update(movie, movie.getId());
         }
-        else{
-            databaseService.update(movie, id);
-        }
-        RedirectView rd = new RedirectView();
-        rd.setUrl("/watchlist");
-        return new ModelAndView(rd);
+
+        return new ModelAndView(new RedirectView("/watchlist", true));
     }
 
     @GetMapping("/watchlist")
@@ -64,6 +67,7 @@ public class MovieController {
         List<Movie> movieList = databaseService.getAllMovies();
         model.put("watchlistrows", movieList);
         model.put("noofmovies", movieList.size());
+
         return new ModelAndView(viewName, model);
     }
 }

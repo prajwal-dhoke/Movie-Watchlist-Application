@@ -16,30 +16,39 @@ public class DatabaseService {
     @Autowired
     RatingService ratingService;
 
-    public void create(Movie movie){
+    public void create(Movie movie) {
         String rating = ratingService.getMovieRating(movie.getTitle());
-        if(rating != null){
-            movie.setRating(Float.parseFloat(rating));
+
+        // Validate and parse rating safely
+        try {
+            if (rating != null && rating.matches("-?\\d+(\\.\\d+)?")) {
+                movie.setRating(Float.parseFloat(rating));
+            } else {
+                movie.setRating(0.0f); // Default rating if invalid
+            }
+        } catch (NumberFormatException e) {
+            movie.setRating(0.0f); // Fallback in case of unexpected error
         }
+
         movieRepo.save(movie);
     }
 
-    public List<Movie> getAllMovies(){
-
+    public List<Movie> getAllMovies() {
         return movieRepo.findAll();
     }
 
-    public Movie getMovieById(Integer id){
-
-        return movieRepo.findById(id).get();
+    public Movie getMovieById(Integer id) {
+        return movieRepo.findById(id).orElse(null);
     }
 
     public void update(Movie movie, Integer id) {
-        Movie toBeUpdated = movieRepo.findById(id).get();
-        toBeUpdated.setTitle(movie.getTitle());
-        toBeUpdated.setRating(movie.getRating());
-        toBeUpdated.setPriority(movie.getPriority());
-        toBeUpdated.setComment(movie.getComment());
-        movieRepo.save(toBeUpdated);
+        Movie toBeUpdated = movieRepo.findById(id).orElse(null);
+        if (toBeUpdated != null) {
+            toBeUpdated.setTitle(movie.getTitle());
+            toBeUpdated.setRating(movie.getRating());
+            toBeUpdated.setPriority(movie.getPriority());
+            toBeUpdated.setComment(movie.getComment());
+            movieRepo.save(toBeUpdated);
+        }
     }
 }
